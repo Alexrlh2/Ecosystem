@@ -8,7 +8,7 @@ import sys
 
 
 # Initialize and run the simulation with graphics
-world = World(100, 100, 20, 5)
+world = World(1000, 1000, 200, 50)
 renderer = WorldRenderer(world)
 clock = pygame.time.Clock()
 

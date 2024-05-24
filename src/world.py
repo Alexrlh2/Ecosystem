@@ -1,5 +1,6 @@
 from herbivore import Herbivore
 from plant import Plant
+
 import random
 class World:
     def __init__(self, width, height, num_plants, num_herbivores):
@@ -11,5 +12,5 @@ class World:
 
     def update(self):
         for herbivore in self.herbivores:
-            herbivore.move(self.width, self.height)
+            herbivore.update(self.width, self.height)
             herbivore.eat(self.plants)
