@@ -1,11 +1,11 @@
-from kivy.app import App
-from kivy.uix.label import Label
+from herbivore import Herbivore
+from plant import Plant
+from world import World
+from worldRenderer import WorldRenderer
 
-class EcosystemApp(App):
-    def build(self):
-        return Label(text="Hello, World!")
+# Initialize and run the simulation with graphics
+world = World(100, 100, 20, 5)
+renderer = WorldRenderer(world)
+renderer.run()
 
-
-if __name__ == '__main__':
-    EcosystemApp().run()
 
