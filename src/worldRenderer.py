@@ -1,7 +1,6 @@
 import world
 
 import pygame
-import sys
 
 
 class WorldRenderer:
@@ -15,9 +14,8 @@ class WorldRenderer:
         pygame.init()
         self.screen = pygame.display.set_mode((world.width * self.SCALE, world.height * self.SCALE))
         pygame.display.set_caption("Ecosystem Simulation")
-        self.clock = pygame.time.Clock()
 
-    def draw_world(self):
+    def _draw_world(self):
         self._draw_background()
         self._draw_entities()
 
@@ -33,18 +31,9 @@ class WorldRenderer:
             rect = pygame.Rect(herbivore.x, herbivore.y, herbivore.size, herbivore.size)
             pygame.draw.rect(self.screen, (0, 0, 255), rect)
 
-    def run(self):
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
+    def draw(self):
+        self._draw_world()
+        pygame.display.flip()
 
-            self.world.update()
-            self.draw_world()
 
-            pygame.display.flip()
-            self.clock.tick(5)
 
-        pygame.quit()
-        sys.exit()
