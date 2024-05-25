@@ -4,10 +4,15 @@ class GameObject:
         self.y = y
         self.size = size
 
+    def update(self, world):
+        pass
     def collidesWith(self, other):
         if (self.x < other.x + other.size and
                 self.x + self.size > other.x and
                 self.y < other.y + other.size and
                 self.y + self.size > other.y):
             return True
+        return False
+
+    def can_eat(self, other):
         return False
