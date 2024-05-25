@@ -3,14 +3,19 @@ from plant import Plant
 
 import random
 class World:
-    def __init__(self, width, height, num_plants, num_herbivores):
+    def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.plants = [Plant(random.randint(0, width - 1), random.randint(0, height - 1)) for _ in range(num_plants)]
-        self.herbivores = [Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)) for _ in
-                           range(num_herbivores)]
+        self.plants = []
+        self.herbivores = []
 
+    def add_plant(self, plant):
+        self.plants.append(plant) #i think eventually we wont need separate lists it'll just be game objects
+
+    def add_herbivore(self, herbivore):
+        self.herbivores.append(herbivore)
     def update(self):
         for herbivore in self.herbivores:
             herbivore.update(self.width, self.height)
             herbivore.eat(self.plants)
+

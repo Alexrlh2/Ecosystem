@@ -1,15 +1,14 @@
-from herbivore import Herbivore
-from plant import Plant
-from world import World
+from god import God
 from worldRenderer import WorldRenderer
 
 import pygame
 import sys
 
 
+
 # Initialize and run the simulation with graphics
-world = World(1000, 1000, 200, 50)
-renderer = WorldRenderer(world)
+god = God()
+renderer = WorldRenderer(god.get_world())
 clock = pygame.time.Clock()
 
 running = True
@@ -18,7 +17,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    world.update()
+    god.update()
     renderer.draw()
     clock.tick(5)
 
