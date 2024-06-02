@@ -20,7 +20,7 @@ class God():
         for _ in range(50):
             world.add(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
 
-        for _ in range(200):
+        for _ in range(100):
             world.add(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         return world

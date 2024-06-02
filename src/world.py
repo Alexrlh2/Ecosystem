@@ -9,7 +9,11 @@ class World:
         self.game_objects = []
 
     def add(self, object):
-        self.game_objects.append(object) #i think eventually we wont need separate lists it'll just be game objects
+        self.game_objects.append(object)
+
+    def remove(self, object):
+        if object in self.game_objects:
+            self.game_objects.remove(object)
 
     def get_objects(self):
         return self.game_objects
