@@ -1,24 +1,17 @@
 import random
 
-from gameObject import GameObject
+from animal import Animal
 from plant import Plant
 
 
-class Herbivore(GameObject):
-    speed_scaler = 10
+class Herbivore(Animal):
 
-    def __init__(self, x, y, energy=100, size=10):
-        super().__init__(x, y, size)
 
-        self.energy = energy
-
-        self.x_speed = random.uniform(-0.5, 0.5)
-        self.y_speed = random.uniform(-0.5, 0.5)
+    def __init__(self, x, y, angle: float = 0,energy=100, size=10):
+        super().__init__(x, y, angle, energy, size)
 
     def update(self, world):
-        self.change_speed()
-        self.move()
-        self.wrap_around_world(world.width, world.height)
+        super().update(world)
 
         self.try_eat(world.get_objects())
 
@@ -28,23 +21,12 @@ class Herbivore(GameObject):
         if self.energy < 0:
             world.remove(self) # ):
 
-    def change_speed(self):
-        self.x_speed = max(-1, min(1, self.x_speed + random.choice((-0.1, 0.1)))) * 0.98
-        self.y_speed = max(-1, min(1, self.y_speed + random.choice((-0.1, 0.1)))) * 0.98
+    def decide_movement(self):
+        self.angle += random.uniform(-1, 1)
+        self.angle = self.angle % 360
 
-    def move(self):
-        self.x += self.x_speed * self.speed_scaler
-        self.y += self.y_speed * self.speed_scaler
-
+    def deplete_energy(self):
         self.energy -= 0.1
-        print (self.energy)
-
-    def wrap_around_world(self, world_width, world_height):
-        self.x = self.x % world_width
-        self.y = self.y % world_height
-
-    def can_eat(self, other):
-        return type(other) is Plant
 
     def try_eat(self, objects):
         for obj in objects:
@@ -53,11 +35,14 @@ class Herbivore(GameObject):
                     objects.remove(obj)
                     self.energy += obj.size
 
-    def decide_to_reproduce(self):
+    def can_eat(self, other):
+        return type(other) is Plant
+
+    def decide_to_reproduce(self) -> bool:
         chance_of_reproduction: float = (self.energy - 100)/100 #more likely with more excess energy
         return random.random() < chance_of_reproduction
 
-    def reproduce(self):
+    def reproduce(self) -> 'Herbivore':
         #arbitrary numbers for now
         self.energy -= 60
         return Herbivore(self.x, self.y, 40)
