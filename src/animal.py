@@ -11,8 +11,8 @@ class Animal(GameObject):
         speed   The speed at which the animal is travelling in the direction it is facing where 0 is not moving, 1 is full speed, and -1 is full speed backwards"""
 
     speed_scaler = 10
-    def __init__(self, x, y, angle: float = 0,energy=100, size=10):
-        super().__init__(x,y, size)
+    def __init__(self, x, y, angle: float = 0,energy=100, radius=10):
+        super().__init__(x,y, radius)
 
         self.angle = angle
         self.energy = energy

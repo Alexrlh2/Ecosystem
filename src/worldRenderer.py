@@ -35,14 +35,13 @@ class WorldRenderer:
                 render_function(obj)
             else:
                 print(f"No render function for object of type {type(obj)}")
-    def _draw_plant(self, plant):
-        rect = pygame.Rect(plant.x, plant.y, plant.size, plant.size)
-        pygame.draw.rect(self.screen, (0, 255, 0), rect)
+    def _draw_plant(self, plant: Plant) -> None:
+        green = (0, 255, 0)
+        pygame.draw.circle(self.screen, green, (plant.x, plant.y), plant.radius)
 
-    def _draw_herbivore(self, herbivore):
-        rect = pygame.Rect(herbivore.x, herbivore.y, herbivore.size, herbivore.size)
-        pygame.draw.rect(self.screen, (0, 0, 255), rect)
-
+    def _draw_herbivore(self, herbivore: Herbivore) -> None:
+        blue = (0, 0, 255)
+        pygame.draw.circle(self.screen, blue, (herbivore.x, herbivore.y), herbivore.radius)
     def draw(self):
         self._draw_world()
         pygame.display.flip()

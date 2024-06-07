@@ -7,8 +7,8 @@ from plant import Plant
 class Herbivore(Animal):
 
 
-    def __init__(self, x, y, angle: float = 0,energy=100, size=10):
-        super().__init__(x, y, angle, energy, size)
+    def __init__(self, x, y, angle: float = 0,energy=100):
+        super().__init__(x, y, angle, energy)
 
     def update(self, world):
         super().update(world)
@@ -33,7 +33,7 @@ class Herbivore(Animal):
             if self.can_eat(obj):
                 if self.collidesWith(obj):
                     objects.remove(obj)
-                    self.energy += obj.size
+                    self.energy += obj.radius
 
     def can_eat(self, other):
         return type(other) is Plant
@@ -45,4 +45,4 @@ class Herbivore(Animal):
     def reproduce(self) -> 'Herbivore':
         #arbitrary numbers for now
         self.energy -= 60
-        return Herbivore(self.x, self.y, 40)
+        return Herbivore(self.x, self.y, self.angle, 40)
