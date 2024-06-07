@@ -19,7 +19,7 @@ while running:
 
     god.update()
     renderer.draw()
-    clock.tick(5)
+    clock.tick(24)
 
 pygame.quit()
 sys.exit()
