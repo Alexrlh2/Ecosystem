@@ -48,7 +48,6 @@ class WorldRenderer:
         brown = (153, 112, 58)
         cream = (250, 239, 225)
         pygame.draw.circle(self.screen, brown, (herbivore.x, herbivore.y), herbivore.radius)
-        print ('angle:', herbivore. angle)
         self._draw_arrow(cream, (herbivore.x, herbivore.y), herbivore.radius, herbivore.angle)
 
     def _draw_arrow(self, color: tuple[int, int, int], start_pos: tuple[int, int], length: int, bearing: float, width: int = 1) -> None:
