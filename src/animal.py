@@ -7,7 +7,7 @@ class Animal(GameObject):
     """Animal is a GameObject that has methods for animal stuff like moving around in the world
 
     Attributes:
-        angle   This is the clockwise angle in degrees where 0 = 360 means the animal is facing north
+        angle   This is the clockwise angle in radians where 0 = 2pi means the animal is facing north
         speed   The speed at which the animal is travelling in the direction it is facing where 0 is not moving, 1 is full speed, and -1 is full speed backwards"""
 
     speed_scaler = 10
@@ -29,12 +29,12 @@ class Animal(GameObject):
         pass
     def move(self):
         dx, dy = self.get_move_vector()
-        self.x, self.y =  self.x + dx, self.y +dy
+        self.x, self.y = self.x + dx, self.y +dy
 
     def get_move_vector(self) -> Tuple[float, float]:
         return (
-            (self.speed * self.speed_scaler) * math.cos(90 - self.angle),
-            (self.speed * self.speed_scaler) * math.sin(90-self.angle))
+            (self.speed * self.speed_scaler) * math.cos((math.pi / 2) - self.angle),
+            (self.speed * self.speed_scaler) * math.sin((math.pi / 2) - self.angle))
 
     def wrap_around_world(self, world_width, world_height):
         self.x = self.x % world_width

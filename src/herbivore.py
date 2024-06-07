@@ -1,4 +1,6 @@
+import math
 import random
+
 
 from animal import Animal
 from plant import Plant
@@ -22,8 +24,8 @@ class Herbivore(Animal):
             world.remove(self) # ):
 
     def decide_movement(self):
-        self.angle += random.uniform(-1, 1)
-        self.angle = self.angle % 360
+        self.angle += random.uniform(-0.1, 0.1)
+        self.angle = self.angle % (math.pi * 2)
 
     def deplete_energy(self):
         self.energy -= 0.1
