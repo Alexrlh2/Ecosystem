@@ -12,6 +12,8 @@ class Herbivore(Animal):
     def __init__(self, x, y, angle: float = 0,energy=100):
         super().__init__(x, y, angle, energy)
 
+        self.angular_momentum = random.choice((-1, 1)) # curent turn direction
+
     def update(self, world):
         super().update(world)
 
@@ -24,8 +26,13 @@ class Herbivore(Animal):
             world.remove(self) # ):
 
     def decide_movement(self):
-        self.angle += random.uniform(-0.1, 0.1)
+        self.angle += (random.uniform(0, 0.2) * self.angular_momentum)
+
         self.angle = self.angle % (math.pi * 2)
+
+        if random.random() < 0.1:
+            self.angular_momentum *= -1
+
 
     def deplete_energy(self):
         self.energy -= 0.1
