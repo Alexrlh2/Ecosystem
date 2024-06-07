@@ -11,7 +11,7 @@ class WorldRenderer:
     Warning - Pygame uses (0,0) = topleft and angles go anticlockwise. Hide away all the disgusting dealing with that in this class"""
 
     SCALE = 1
-    BACKGROUND_COLOUR = (110, 86, 58)
+    BACKGROUND_COLOUR = (224, 208, 162)
 
     def __init__(self, world):
 
@@ -41,15 +41,15 @@ class WorldRenderer:
             else:
                 print(f"No render function for object of type {type(obj)}")
     def _draw_plant(self, plant: Plant) -> None:
-        green = (0, 255, 0)
+        green = (78, 125, 67)
         pygame.draw.circle(self.screen, green, (plant.x, plant.y), plant.radius)
 
     def _draw_herbivore(self, herbivore: Herbivore) -> None:
-        blue = (0, 0, 255)
-        red = (255, 0, 0)
-        pygame.draw.circle(self.screen, blue, (herbivore.x, herbivore.y), herbivore.radius)
+        brown = (153, 112, 58)
+        cream = (250, 239, 225)
+        pygame.draw.circle(self.screen, brown, (herbivore.x, herbivore.y), herbivore.radius)
         print ('angle:', herbivore. angle)
-        self._draw_arrow(red, (herbivore.x, herbivore.y), herbivore.radius, herbivore.angle)
+        self._draw_arrow(cream, (herbivore.x, herbivore.y), herbivore.radius, herbivore.angle)
 
     def _draw_arrow(self, color: tuple[int, int, int], start_pos: tuple[int, int], length: int, bearing: float, width: int = 1) -> None:
         """
