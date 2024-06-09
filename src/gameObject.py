@@ -6,6 +6,14 @@ class GameObject:
         self.y = y
         self.radius = radius
 
+    @property
+    def pos(self):
+        return (self.x, self.y)
+
+    @pos.setter
+    def pos(self, value):
+        self.x, self.y = value
+
     def update(self, world):
         pass
 
