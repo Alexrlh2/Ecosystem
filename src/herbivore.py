@@ -17,10 +17,10 @@ class Herbivore(Animal):
     def update(self, world):
         super().update(world)
 
-        self.try_eat(world.get_objects())
+        self.try_eat(world.plants)
 
         if self.decide_to_reproduce():
-            world.add(self.reproduce()) # (:
+            world.add_herbivore(self.reproduce()) # (:
 
         if self.energy < 0:
             world.remove(self) # ):

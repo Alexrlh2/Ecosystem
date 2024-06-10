@@ -34,7 +34,7 @@ class WorldRenderer:
         self.screen.fill(self.BACKGROUND_COLOUR)
 
     def _draw_entities(self):
-        for obj in self.world.get_objects():
+        for obj in self.world.get_all_objects():
             render_function = self.render_functions.get(type(obj), None)
             if render_function:
                 render_function(obj)

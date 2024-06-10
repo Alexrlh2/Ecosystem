@@ -18,15 +18,15 @@ class God():
     def create_world(self, width, height):
         world = World(width, height)
         for _ in range(50):
-            world.add(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
+            world.add_herbivore(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         for _ in range(100):
-            world.add(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
+            world.add_plant(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         return world
 
     def update(self):
-        for obj in self.world.get_objects():
+        for obj in self.world.get_all_objects():
             obj.update(self.world)
         ##create more plants?
 

@@ -13,17 +13,26 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.game_objects = []
+        self.plants = []
+        self.herbivores = []
 
-    def add(self, object):
-        self.game_objects.append(object)
+    def add_plant(self, plant: Plant):
+        self.plants.append(plant)
+
+    def add_herbivore(self, herbivore: Herbivore):
+        self.herbivores.append(herbivore)
+
+    def get_all_objects(self):
+        yield from self.plants
+        yield from self.herbivores
 
     def remove(self, object):
-        if object in self.game_objects:
-            self.game_objects.remove(object)
+        if object in self.plants:
+            self.plants.remove(object)
+        if object in self.herbivores:
+            self.herbivores.remove(object)
 
     def get_objects_near(self, position: tuple[float, float], radius: int) -> List:
-        return [object for object in self.game_objects if geometry_utils.is_closer_than(position, object.pos, radius)]
+        return [object for object in self.get_all_objects() if
+                geometry_utils.is_closer_than(position, object.pos, radius)]
 
-    def get_objects(self):
-        return self.game_objects
