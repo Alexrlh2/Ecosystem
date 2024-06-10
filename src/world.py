@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from herbivore import Herbivore
 from plant import Plant
@@ -31,6 +31,16 @@ class World:
             self.plants.remove(object)
         if object in self.herbivores:
             self.herbivores.remove(object)
+
+    def get_nearest_plant(self, pos: tuple[float, float]) -> Optional[Plant]:
+        nearest_plant = None
+        for plant in self.plants:
+            if (
+                (not nearest_plant) or
+                (geometry_utils.is_closer_than(pos, plant.pos, geometry_utils.get_distance_between(pos, nearest_plant.pos)))
+            ):
+                nearest_plant = plant
+        return nearest_plant
 
     def get_objects_near(self, position: tuple[float, float], radius: int) -> List:
         return [object for object in self.get_all_objects() if
