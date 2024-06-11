@@ -1,4 +1,5 @@
 import math
+from typing import Tuple
 
 import geometry_utils
 class GameObject:
@@ -20,6 +21,13 @@ class GameObject:
 
     def collidesWith(self, other: 'GameObject') -> bool:
         return geometry_utils.is_closer_than(self.pos, other.pos, self.radius)
+
+    def get_relative_distance_and_angle(self, other: 'GameObject') -> Tuple[float, float]:
+        """Gets the distance to other and the angle self would need turn to face it in radians"""
+        distance = geometry_utils.get_distance_between(self.pos, other.pos)
+        dx, dy = other.x - self.x, other.y - self.y
+        angle = math.atan2(dy, dx)
+        return distance, angle
 
     def can_eat(self, other):
         return False
