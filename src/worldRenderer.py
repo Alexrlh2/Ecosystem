@@ -50,16 +50,14 @@ class WorldRenderer:
         pygame.draw.circle(self.screen, brown, (herbivore.x, herbivore.y), herbivore.radius)
         self._draw_arrow(cream, (herbivore.x, herbivore.y), herbivore.radius, herbivore.angle)
 
-    def _draw_arrow(self, color: tuple[int, int, int], start_pos: tuple[int, int], length: int, bearing: float, width: int = 1) -> None:
+    def _draw_arrow(self, color: tuple[int, int, int], start_pos: tuple[int, int], length: int, angle: float, width: int = 1) -> None:
         """
         :param color: The color of the arrow.
         :param start_pos: The starting position (tail) of the arrow as a tuple (x, y).
         :param length: The length of the arrow.
-        :param bearing_degrees: The direction of the arrow in degrees (0 or 360 is up, 90 is right).
+        :param angle: The anticlockwise angle in radians where 0 and 2pi point to the right
         :param width: The width of the arrow's shaft.
         """
-
-        angle = math.pi / 2 - bearing
 
         end_pos = (start_pos[0] + length * math.cos(angle),
                    start_pos[1] + length * math.sin(angle))
