@@ -11,16 +11,19 @@ class God():
 
     I believe this is not the God Object antipattern but that's something to keep an eye on"""
 
+    initial_herbivore_population = 50
+    intial_plant_population = 100
+
     def __init__(self):
         self.world = self.create_world(1000, 1000)
 
     def create_world(self, width, height):
         world = World(width, height)
 
-        for _ in range(50):
+        for _ in range(self.initial_herbivore_population):
             world.add_herbivore(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
 
-        for _ in range(100):
+        for _ in range(self.intial_plant_population ):
             world.add_plant(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         return world
