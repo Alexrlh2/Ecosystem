@@ -4,7 +4,6 @@ from world import World
 
 import random
 
-
 class God():
     """God is responsible for initially populating the earth. God may also take responsibility
     for things such as plant reproduction until this is implemented. When plants can repopulate themselves
@@ -17,6 +16,7 @@ class God():
 
     def create_world(self, width, height):
         world = World(width, height)
+
         for _ in range(50):
             world.add_herbivore(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
 

@@ -4,8 +4,6 @@ from worldRenderer import WorldRenderer
 import pygame
 import sys
 
-
-
 # Initialize and run the simulation with graphics
 god = God()
 renderer = WorldRenderer(god.get_world())

@@ -1,14 +1,10 @@
 import math
 import random
 
-
 from animal import Animal
 from plant import Plant
 
-
 class Herbivore(Animal):
-
-
     def __init__(self, x, y, angle: float = 0,energy=100):
         super().__init__(x, y, angle, energy)
 
@@ -33,14 +29,13 @@ class Herbivore(Animal):
         if random.random() < 0.1:
             self.angular_momentum *= -1
 
-
     def deplete_energy(self):
         self.energy -= 0.1
 
     def try_eat(self, objects):
         for obj in objects:
             if self.can_eat(obj):
-                if self.collidesWith(obj):
+                if self.collides_with(obj):
                     objects.remove(obj)
                     self.energy += obj.radius
 

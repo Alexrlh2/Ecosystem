@@ -1,16 +1,17 @@
-from gameObject import GameObject
-
-
 import math
+
+from gameObject import GameObject
 from typing import Tuple
+
 class Animal(GameObject):
     """Animal is a GameObject that has methods for animal stuff like moving around in the world
 
     Attributes:
         angle   The anticlockwise angle in radians where 0 and 2pi point to the right
         speed   The speed at which the animal is travelling in the direction it is facing where 0 is not moving, 1 is full speed, and -1 is full speed backwards"""
-
+    
     speed_scaler = 10
+
     def __init__(self, x, y, angle: float = 0,energy=100, radius=10):
         super().__init__(x,y, radius)
 
@@ -27,6 +28,7 @@ class Animal(GameObject):
     """Implement to adjust speed and direction before the animal takes its step"""
     def decide_movement(self):
         pass
+
     def move(self):
         dx, dy = self.get_move_vector()
         self.x, self.y = self.x + dx, self.y + dy

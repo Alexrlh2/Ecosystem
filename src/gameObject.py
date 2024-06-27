@@ -19,7 +19,7 @@ class GameObject:
     def update(self, world):
         pass
 
-    def collidesWith(self, other: 'GameObject') -> bool:
+    def collides_with(self, other: 'GameObject') -> bool:
         return geometry_utils.is_closer_than(self.pos, other.pos, self.radius)
 
     def get_relative_distance_and_angle(self, other: 'GameObject') -> Tuple[float, float]:

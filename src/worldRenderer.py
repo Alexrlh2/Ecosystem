@@ -4,7 +4,6 @@ from herbivore import Herbivore
 import math
 import pygame
 
-
 class WorldRenderer:
     """Renders a world and all its GameObjects
 
@@ -14,7 +13,6 @@ class WorldRenderer:
     BACKGROUND_COLOUR = (224, 208, 162)
 
     def __init__(self, world):
-
         self.world = world
 
         pygame.init()
@@ -40,6 +38,7 @@ class WorldRenderer:
                 render_function(obj)
             else:
                 print(f"No render function for object of type {type(obj)}")
+
     def _draw_plant(self, plant: Plant) -> None:
         green = (78, 125, 67)
         pygame.draw.circle(self.screen, green, (plant.x, plant.y), plant.radius)
@@ -67,6 +66,7 @@ class WorldRenderer:
 
         head_length = 4
         head_width = 4
+
         # Calculate the points for the arrow head
         left_point = (end_pos[0] - head_length * math.cos(angle - math.pi / 6),
                       end_pos[1] - head_length * math.sin(angle - math.pi / 6))
@@ -75,6 +75,7 @@ class WorldRenderer:
 
         # Draw the arrow head
         pygame.draw.polygon(self.screen, color, [end_pos, left_point, right_point])
+
     def draw(self):
         self._draw_world()
         pygame.display.flip()

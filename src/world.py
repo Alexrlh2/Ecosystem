@@ -8,7 +8,6 @@ import geometry_utils
 import random
 import math
 
-
 class World:
     def __init__(self, width, height):
         self.width = width
