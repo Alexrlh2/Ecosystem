@@ -71,7 +71,7 @@ class Animal(GameObject):
     def reproduce(self) -> 'Animal':
         self.energy -= self.reproduction_cost
         new_brain = self.brain.spawn()
-        return Animal(self.x, self.y, new_brain, self.angle, self.baby_energy)
+        return self.__class__(self.x, self.y, new_brain, self.angle, self.baby_energy)
 
     """Implement to sense the environment, and return sensations in list format"""
     def sense_environment() -> List[float]:
@@ -91,8 +91,4 @@ class Animal(GameObject):
 
     def decide_to_reproduce(self, decisions: list) -> bool:
         pass
-
-
-
-
  
