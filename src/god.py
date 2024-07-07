@@ -21,10 +21,10 @@ class God():
         world = World(width, height)
 
         for _ in range(self.initial_herbivore_population):
-            world.add_herbivore(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
+            world.add_object(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         for _ in range(self.intial_plant_population ):
-            world.add_plant(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
+            world.add_object(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
 
         return world
 

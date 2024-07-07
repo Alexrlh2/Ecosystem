@@ -1,6 +1,8 @@
-from typing import List, Optional
+from typing import List, Optional, Type
 
+from gameObject import GameObject
 from herbivore import Herbivore
+from animal import Animal
 from plant import Plant
 
 import geometry_utils
@@ -12,18 +14,24 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.plants = []
-        self.herbivores = []
+        self.plants: List[Plant] = []
+        self.herbivores: List[Herbivore] = []
 
-    def add_plant(self, plant: Plant):
-        self.plants.append(plant)
-
-    def add_herbivore(self, herbivore: Herbivore):
-        self.herbivores.append(herbivore)
+    def add_object(self, object: GameObject):
+        object_list = self.get_objects_by_type(type(object))
+        object_list.append(object)
 
     def get_all_objects(self):
         yield from self.plants
         yield from self.herbivores
+
+    def get_objects_by_type(self, cls: Type[GameObject]):
+        if cls == Plant:
+            return self.plants
+        elif cls == Herbivore:
+            return self.herbivores
+        else:
+            return None
 
     def remove(self, object):
         if object in self.plants:

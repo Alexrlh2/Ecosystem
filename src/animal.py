@@ -1,7 +1,7 @@
 import math
 
 from gameObject import GameObject
-from typing import Tuple
+from typing import List, Tuple, Type
 
 class Animal(GameObject):
     """Animal is a GameObject that has methods for animal stuff like moving around in the world
@@ -19,15 +19,21 @@ class Animal(GameObject):
         self.energy = energy
         self.speed = 0.5
 
+        # Define in inherited classes so animal can eat things
+        self.edible_types: List[Type[GameObject]] = []
+
     def update(self, world):
         self.decide_movement()
         self.move()
         self.deplete_energy()
         self.wrap_around_world(world.width, world.height)
+        self.try_eat(world)
 
-    """Implement to adjust speed and direction before the animal takes its step"""
-    def decide_movement(self):
-        pass
+        if self.decide_to_reproduce():
+            world.add_object(self.reproduce()) # (:
+
+        if self.energy < 0:
+            world.remove(self) # ):
 
     def move(self):
         dx, dy = self.get_move_vector()
@@ -37,11 +43,33 @@ class Animal(GameObject):
         return (
             (self.speed * self.speed_scaler) * math.cos(self.angle),
             (self.speed * self.speed_scaler) * math.sin(self.angle))
-
+    
     def wrap_around_world(self, world_width, world_height):
         self.x = self.x % world_width
         self.y = self.y % world_height
 
-    """Override to deplete energy each update. Refer to speed to make energy depletion dependent on movement"""
+    def try_eat(self, world):
+        for cls in self.edible_types:
+            objects = world.get_objects_by_type(cls)
+            for obj in objects:
+                if self.collides_with(obj):
+                    objects.remove(obj)
+                    self.energy += obj.radius
+
+    """Implement to adjust speed and direction before the animal takes its step"""
+    def decide_movement(self):
+        pass
+    
+    """Implement to deplete energy each update. Refer to speed to make energy depletion dependent on movement"""
     def deplete_energy(self):
         pass
+
+    def decide_to_reproduce(self) -> bool:
+        pass
+
+    def reproduce(self) -> 'Animal':
+        pass
+
+
+
+ 

@@ -8,18 +8,8 @@ class Herbivore(Animal):
     def __init__(self, x, y, angle: float = 0,energy=100):
         super().__init__(x, y, angle, energy)
 
-        self.angular_momentum = random.choice((-1, 1)) # curent turn direction
-
-    def update(self, world):
-        super().update(world)
-
-        self.try_eat(world.plants)
-
-        if self.decide_to_reproduce():
-            world.add_herbivore(self.reproduce()) # (:
-
-        if self.energy < 0:
-            world.remove(self) # ):
+        self.edible_types = [Plant]
+        self.angular_momentum = random.choice((-1, 1)) # current turn direction
 
     def decide_movement(self):
         self.angle += (random.uniform(0, 0.2) * self.angular_momentum)
@@ -31,16 +21,6 @@ class Herbivore(Animal):
 
     def deplete_energy(self):
         self.energy -= 0.1
-
-    def try_eat(self, objects):
-        for obj in objects:
-            if self.can_eat(obj):
-                if self.collides_with(obj):
-                    objects.remove(obj)
-                    self.energy += obj.radius
-
-    def can_eat(self, other):
-        return type(other) is Plant
 
     def decide_to_reproduce(self) -> bool:
         chance_of_reproduction: float = (self.energy - 100)/100 #more likely with more excess energy
