@@ -1,32 +1,36 @@
 import math
 import random
 
+from typing import List, Type
+
 from animal import Animal
 from plant import Plant
+from brain import Brain
 
 class Herbivore(Animal):
-    def __init__(self, x, y, angle: float = 0,energy=100):
-        super().__init__(x, y, angle, energy)
+    def __init__(self, x, y, brain: 'Brain', angle: float = 0, energy = 100):
+        super().__init__(x, y, brain, angle, energy)
 
         self.edible_types = [Plant]
         self.angular_momentum = random.choice((-1, 1)) # current turn direction
 
-    def decide_movement(self):
-        self.angle += (random.uniform(0, 0.2) * self.angular_momentum)
+    def sense_environment(self) -> List[float]:
+        return []
 
+    def decide_movement(self, decisions):
+
+        angle_change = decisions[0]
+        self.angle += angle_change
         self.angle = self.angle % (math.pi * 2)
 
-        if random.random() < 0.1:
-            self.angular_momentum *= -1
+        speed_change = decisions[1]
+        self.speed += speed_change
 
     def deplete_energy(self):
         self.energy -= 0.1
 
-    def decide_to_reproduce(self) -> bool:
+    def decide_to_reproduce(self, decisions) -> bool:
         chance_of_reproduction: float = (self.energy - 100)/100 #more likely with more excess energy
-        return random.random() < chance_of_reproduction
+        reproduction_predictor = decisions[2]
+        return reproduction_predictor < chance_of_reproduction
 
-    def reproduce(self) -> 'Herbivore':
-        #arbitrary numbers for now
-        self.energy -= 60
-        return Herbivore(self.x, self.y, self.angle, 40)

@@ -28,6 +28,3 @@ class GameObject:
         dx, dy = other.x - self.x, other.y - self.y
         angle = math.atan2(dy, dx)
         return distance, angle
-
-    def can_eat(self, other):
-        return False

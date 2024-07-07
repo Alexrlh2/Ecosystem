@@ -1,6 +1,7 @@
 from herbivore import Herbivore
 from plant import Plant
 from world import World
+from brain import RandomBrain
 
 import random
 
@@ -21,7 +22,7 @@ class God():
         world = World(width, height)
 
         for _ in range(self.initial_herbivore_population):
-            world.add_object(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1)))
+            world.add_object(Herbivore(random.randint(0, width - 1), random.randint(0, height - 1), RandomBrain()))
 
         for _ in range(self.intial_plant_population ):
             world.add_object(Plant(random.randint(0, width - 1), random.randint(0, height - 1)))
